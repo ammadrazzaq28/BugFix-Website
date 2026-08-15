@@ -73,8 +73,10 @@ section[id]{scroll-margin-top:88px}
 
 /* ── preloader ── */
 #pre{position:fixed;inset:0;z-index:300;background:var(--ink);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:18px;transition:opacity .7s var(--ease),visibility .7s}
-#pre.done{opacity:0;visibility:hidden;pointer-events:none}
+  align-items:center;justify-content:center;gap:18px;transition:opacity .7s var(--ease),visibility .7s;
+  animation:preout .55s var(--ease) 2.4s forwards}
+#pre.done{opacity:0;visibility:hidden;pointer-events:none;animation:none}
+@keyframes preout{to{opacity:0;visibility:hidden;pointer-events:none}}
 .pre-mark{font-family:var(--dsp);font-weight:800;font-size:clamp(18px,3vw,22px);letter-spacing:-.04em}
 .pre-pct{font-family:var(--dsp);font-weight:800;font-size:clamp(64px,14vw,160px);letter-spacing:-.06em;line-height:.85;display:flex;align-items:flex-start}
 .pre-pct em{font-style:normal;font-size:.38em;margin-top:.18em;color:var(--tx3)}
