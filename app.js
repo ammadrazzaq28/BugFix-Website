@@ -81,28 +81,31 @@
   Array.prototype.forEach.call(pbtns, function (b) {
     b.addEventListener('click', function () { setPlatform(b.dataset.plat); });
   });
-  movePill(pbtns[0]);
-  window.addEventListener('load', function () { movePill(pbtns[0]); });
+  setPlatform('android');
+  window.addEventListener('load', function () {
+    movePill(tog.querySelector('[aria-pressed="true"]'));
+  });
   window.addEventListener('resize', function () {
     movePill(tog.querySelector('[aria-pressed="true"]'));
     if (window.innerWidth > 900) setMenu(false);
   });
 
-  /* ── phone screen switcher ── */
-  var swatches = document.querySelectorAll('.swatch button');
-  Array.prototype.forEach.call(swatches, function (b) {
-    b.addEventListener('click', function () {
-      Array.prototype.forEach.call(swatches, function (x) {
-        x.setAttribute('aria-pressed', 'false');
-      });
-      var views = document.querySelectorAll('.appview');
-      Array.prototype.forEach.call(views, function (v) { v.classList.remove('on'); });
-      b.setAttribute('aria-pressed', 'true');
-      document.getElementById(b.dataset.app).classList.add('on');
+  /* ── hero parallax ── */
+  var stage = document.getElementById('orbit');
+  var scene = stage && stage.querySelector('.scene');
+  if (stage && scene && fine && !R) {
+    stage.addEventListener('pointermove', function (e) {
+      var r = stage.getBoundingClientRect();
+      var dx = ((e.clientX - r.left) / r.width - 0.5) * 12;
+      var dy = ((e.clientY - r.top) / r.height - 0.5) * -8;
+      scene.style.transform = 'rotateX(' + (18 + dy) + 'deg) rotateY(' + dx + 'deg) rotateZ(-8deg)';
     });
-  });
+    stage.addEventListener('pointerleave', function () {
+      scene.style.transform = 'rotateX(18deg) rotateY(0deg) rotateZ(-8deg)';
+    });
+  }
 
-  /* ── waveform bars ── */
+  /* ── featured waveform ── */
   function fillWave(el, count) {
     if (!el) return;
     for (var i = 0; i < count; i++) {
@@ -113,7 +116,6 @@
       el.appendChild(barEl);
     }
   }
-  fillWave(document.getElementById('wave'), 30);
   fillWave(document.getElementById('featwave'), 42);
 
   /* ── card cursor glow ── */
