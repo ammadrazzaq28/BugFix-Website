@@ -7,22 +7,11 @@
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = String(new Date().getFullYear());
 
-  /* ── Lahore clock ── */
-  function tickClock() {
-    var fmt = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Asia/Karachi', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-    });
-    var t = fmt.format(new Date());
-    ['clock', 'clock-m'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) { el.textContent = t; el.setAttribute('datetime', t); }
-    });
-  }
-  tickClock();
-  setInterval(tickClock, 1000);
-
-  /* ── preloader ── */
+  /* ── preloader (first, so a later error cannot trap the screen) ── */
   var pre = document.getElementById('pre');
+  function hidePre() {
+    if (pre) pre.classList.add('done');
+  }
   if (pre) {
     var fill = pre.querySelector('.pre-bar i');
     var pct = pre.querySelector('.pre-pct span');
@@ -32,12 +21,29 @@
       if (n >= 100) {
         n = 100;
         clearInterval(t);
-        setTimeout(function () { pre.classList.add('done'); }, 280);
+        setTimeout(hidePre, 160);
       }
-      fill.style.width = n + '%';
-      pct.textContent = String(Math.round(n));
-    }, R ? 16 : 80);
+      if (fill) fill.style.width = n + '%';
+      if (pct) pct.textContent = String(Math.round(n));
+    }, R ? 16 : 70);
+    setTimeout(hidePre, 2800);
   }
+
+  /* ── Lahore clock ── */
+  try {
+    function tickClock() {
+      var fmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Karachi', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      });
+      var clockT = fmt.format(new Date());
+      ['clock', 'clock-m'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.textContent = clockT; el.setAttribute('datetime', clockT); }
+      });
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
+  } catch (err) {}
 
   /* ── sticky nav + scroll progress ── */
   var nav = document.querySelector('.nav');
