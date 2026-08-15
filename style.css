@@ -46,7 +46,7 @@ button{font:inherit;color:inherit;background:none;border:0}
 @media(pointer:fine) and (hover:hover){
   body.has-cur{cursor:none}
   body.has-cur a,body.has-cur button,body.has-cur label,body.has-cur summary,body.has-cur input,body.has-cur textarea{cursor:none}
-  .cur{display:block;position:fixed;left:0;top:0;z-index:180;pointer-events:none;mix-blend-mode:difference}
+  .cur{display:block;position:fixed;left:0;top:0;z-index:180;pointer-events:none;mix-blend-mode:difference;will-change:transform}
   .cur i,.cur b{position:absolute;border-radius:50%;transform:translate(-50%,-50%)}
   .cur i{width:8px;height:8px;background:#fff}
   .cur b{width:36px;height:36px;border:1px solid rgba(255,255,255,.55);transition:width .25s var(--ease),height .25s var(--ease),opacity .25s}
@@ -106,9 +106,9 @@ header.nav.stuck{background:rgba(11,12,14,.78);border-bottom-color:var(--line)}
 .ptog .pill{position:absolute;z-index:1;top:3px;bottom:3px;border-radius:999px;
   background:linear-gradient(120deg,var(--a1),var(--a2));transition:transform .5s var(--ease),width .5s var(--ease)}
 
-.mag{transition:transform .45s var(--ease),box-shadow .3s,background .25s,border-color .25s}
+.mag{transition:transform .18s var(--ease),box-shadow .2s,background .2s,border-color .2s}
 .cta{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:999px;font-size:14px;
-  font-weight:500;background:var(--tx);color:var(--ink);transition:box-shadow .3s,background .25s,transform .45s var(--ease)}
+  font-weight:500;background:var(--tx);color:var(--ink);transition:box-shadow .2s,background .2s,transform .18s var(--ease)}
 .cta:hover{box-shadow:0 12px 32px rgba(0,0,0,.45)}
 .cta.ghost{background:transparent;color:var(--tx);border:1px solid var(--line2)}
 .cta.ghost:hover{border-color:var(--tx2);box-shadow:none;background:var(--glass)}
