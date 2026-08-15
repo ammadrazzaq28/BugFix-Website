@@ -17,16 +17,16 @@
     var pct = pre.querySelector('.pre-pct span');
     var n = 0;
     var t = setInterval(function () {
-      n += R ? 50 : Math.random() * 14 + 5;
+      n += R ? 50 : Math.random() * 22 + 12;
       if (n >= 100) {
         n = 100;
         clearInterval(t);
-        setTimeout(hidePre, 160);
+        setTimeout(hidePre, 80);
       }
       if (fill) fill.style.width = n + '%';
       if (pct) pct.textContent = String(Math.round(n));
-    }, R ? 16 : 70);
-    setTimeout(hidePre, 2800);
+    }, R ? 16 : 40);
+    setTimeout(hidePre, 700);
   }
 
   /* ── Lahore clock ── */
@@ -122,7 +122,7 @@
       el.appendChild(barEl);
     }
   }
-  fillWave(document.getElementById('featwave'), 42);
+  fillWave(document.getElementById('featwave'), 22);
 
   /* ── card cursor glow ── */
   var cards = document.querySelectorAll('.app');
@@ -197,11 +197,35 @@
     });
   }
 
+  /* ── count-up ── */
+  function countUp(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var start = performance.now();
+    var dur = 1100;
+    function frame(now) {
+      var t = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3);
+      var val = target * eased;
+      el.textContent = (dec ? val.toFixed(dec) : String(Math.round(val))) + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function runCounts(root) {
+    var nums = root.querySelectorAll ? root.querySelectorAll('[data-count]') : [];
+    Array.prototype.forEach.call(nums, countUp);
+  }
+
   /* ── scroll reveal ── */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
         e.target.classList.add('in');
+        runCounts(e.target);
         io.unobserve(e.target);
       }
     });
@@ -209,8 +233,11 @@
 
   var reveal = document.querySelectorAll('.rv, .step');
   Array.prototype.forEach.call(reveal, function (el) {
-    if (R) el.classList.add('in');
-    else io.observe(el);
+    if (R) {
+      el.classList.add('in');
+    } else {
+      io.observe(el);
+    }
   });
 
   /* ── FAQ accordion: one open ── */
