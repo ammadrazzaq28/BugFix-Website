@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BugFix Technologies — Consumer iOS &amp; Android apps, shipped.</title>
+<meta name="description" content="BugFix Technologies designs, builds and ships consumer iOS and Android apps — then runs the monetization, ASO and update cycle that keeps them ranking.">
+<meta property="og:title" content="BugFix Technologies — Consumer iOS &amp; Android apps, shipped.">
+<meta property="og:description" content="A product studio in Lahore building consumer apps for iOS and Android.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0C11">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%235B8CFF'/><rect x='11' y='11' width='10' height='10' rx='2' transform='rotate(45 16 16)' fill='%230A0C11'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   BugFix Technologies — design tokens & stylesheet
+   Edit points in HTML are marked  data-edit
+   ══════════════════════════════════════════════ */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0}
+
+:root{
+  --ink:#0A0C11; --ink2:#0D1017; --surf:#12161F; --surf2:#171C27;
+  --line:rgba(255,255,255,.075); --line2:rgba(255,255,255,.15);
+  --tx:#EEF1F7; --tx2:#96A0B4; --tx3:#5C6577;
+  --a1:#5B8CFF; --a2:#A57BFF; --a-soft:rgba(91,140,255,.14);
+  --icon-r:22.5%;
+  --dsp:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,sans-serif;
+  --body:"Inter Tight",-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+  --pad:clamp(20px,5vw,72px); --maxw:1240px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html.plat-android{
+  --a1:#FF9A3C; --a2:#FF5B6E; --a-soft:rgba(255,154,60,.14); --icon-r:50%;
+}
+
+body{background:var(--ink);color:var(--tx);font-family:var(--body);font-size:16px;
+  line-height:1.6;font-weight:350;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--a1);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-9999px;top:0;z-index:300;padding:12px 18px;background:var(--tx);color:var(--ink);border-radius:0 0 10px 0}
+.skip:focus{left:0}
+
+/* ── type ── */
+.dsp{font-family:var(--dsp);font-weight:700;letter-spacing:-.035em;line-height:.94}
+h1.dsp{font-size:clamp(40px,6.3vw,84px);font-weight:800;margin:0}
+h2.dsp{font-size:clamp(32px,4.8vw,64px);margin:0}
+h3.dsp{font-size:clamp(22px,2.3vw,30px);letter-spacing:-.025em;line-height:1.12;margin:0}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--tx3)}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--a1)}
+.lead{font-size:clamp(16px,1.35vw,19px);color:var(--tx2);max-width:56ch;line-height:1.66}
+.grad{background:linear-gradient(100deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ── layout ── */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+section{position:relative;padding-block:clamp(80px,10vw,148px)}
+section[id]{scroll-margin-top:88px}
+.sechead{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(40px,5vw,72px)}
+.sechead .lead{max-width:44ch}
+
+/* ── preloader ── */
+#pre{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:22px;transition:opacity .6s var(--ease),visibility .6s}
+#pre.done{opacity:0;visibility:hidden}
+#pre .bar{width:min(320px,60vw);height:2px;background:rgba(255,255,255,.09);overflow:hidden}
+#pre .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a1),var(--a2))}
+#pre .pct{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--tx3)}
+#pre .mk{font-family:var(--dsp);font-weight:800;font-size:clamp(20px,4vw,26px);letter-spacing:-.04em;text-align:center;padding:0 20px}
+
+/* ── nav ── */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;
+  transition:background .35s,border-color .35s,backdrop-filter .35s}
+header.nav.stuck{background:rgba(10,12,17,.72);backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom-color:var(--line)}
+.navin{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);height:68px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--dsp);font-weight:800;font-size:clamp(14px,1.6vw,19px);letter-spacing:-.04em;white-space:nowrap}
+.brand .glyph{width:24px;height:24px;border-radius:var(--icon-r);background:linear-gradient(140deg,var(--a1),var(--a2));
+  display:grid;place-items:center;transition:border-radius .5s var(--ease)}
+.brand .glyph::after{content:"";width:8px;height:8px;border-radius:2px;background:var(--ink);transform:rotate(45deg)}
+.navlinks{display:flex;gap:26px;margin-left:auto}
+.navlinks a{font-size:14px;color:var(--tx2);transition:color .2s}
+.navlinks a:hover{color:var(--tx)}
+
+/* ── platform toggle : the signature control ── */
+.ptog{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);
+  border-radius:999px;background:rgba(255,255,255,.03);position:relative}
+.ptog button{position:relative;z-index:2;padding:6px 13px;border-radius:999px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);transition:color .3s}
+.ptog button[aria-pressed="true"]{color:var(--ink)}
+.ptog .pill{position:absolute;z-index:1;top:3px;bottom:3px;border-radius:999px;
+  background:linear-gradient(120deg,var(--a1),var(--a2));transition:transform .5s var(--ease),width .5s var(--ease)}
+
+.cta{display:inline-flex;align-items:center;gap:9px;padding:11px 19px;border-radius:999px;font-size:14px;
+  font-weight:500;background:var(--tx);color:var(--ink);transition:transform .3s var(--ease),box-shadow .3s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.cta.ghost{background:transparent;color:var(--tx);border:1px solid var(--line2)}
+.cta.ghost:hover{border-color:var(--tx2);box-shadow:none}
+.cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ── hero ── */
+.hero{padding-top:clamp(120px,15vw,180px);padding-bottom:clamp(60px,7vw,96px);overflow:hidden}
+.aurora{position:absolute;inset:-20% -10% auto;height:820px;pointer-events:none;z-index:0;filter:blur(90px);opacity:.5}
+.aurora i{position:absolute;border-radius:50%;display:block;transition:background 1s var(--ease)}
+.aurora i:nth-child(1){width:44vw;height:44vw;left:2%;top:4%;background:var(--a1);opacity:.32}
+.aurora i:nth-child(2){width:38vw;height:38vw;right:6%;top:0;background:var(--a2);opacity:.28}
+.aurora i:nth-child(3){width:30vw;height:30vw;left:38%;top:26%;background:var(--a1);opacity:.16}
+.grid-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:76px 76px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,#000 10%,transparent 72%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,#000 10%,transparent 72%)}
+.heroin{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,72px);align-items:center}
+h1.dsp span.line{display:block;overflow:hidden}
+h1.dsp span.line b{display:block;font-weight:inherit;transform:translateY(105%);animation:rise .95s var(--ease) forwards}
+h1.dsp span.line:nth-child(2) b{animation-delay:.09s}
+h1.dsp span.line:nth-child(3) b{animation-delay:.18s}
+@keyframes rise{to{transform:translateY(0)}}
+.herocta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;margin-top:clamp(48px,6vw,72px);position:relative;z-index:2}
+.stats div{background:var(--ink2);padding:20px 18px}
+.stats .n{font-family:var(--dsp);font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.stats .l{color:var(--tx3);margin-top:7px;font-size:12.5px}
+
+/* ── device ── */
+.stage{position:relative;display:grid;place-items:center;min-height:560px}
+.glow{position:absolute;width:88%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,var(--a-soft),transparent 66%);filter:blur(20px)}
+.phone{position:relative;width:min(292px,72vw);aspect-ratio:9/19.3;border-radius:46px;padding:9px;
+  background:linear-gradient(160deg,#31384a,#0F131B 45%,#262C3A);
+  box-shadow:0 44px 90px -22px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07) inset;
+  transition:border-radius .55s var(--ease)}
+html.plat-android .phone{border-radius:32px}
+.screen{position:relative;height:100%;border-radius:38px;overflow:hidden;background:#080A0F;transition:border-radius .55s var(--ease)}
+html.plat-android .screen{border-radius:24px}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:88px;height:24px;border-radius:999px;
+  background:#000;z-index:6;transition:width .5s var(--ease),height .5s var(--ease),top .5s var(--ease)}
+html.plat-android .notch{width:11px;height:11px;top:11px}
+.sbar{position:absolute;top:0;left:0;right:0;height:42px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;font-family:var(--mono);font-size:9.5px;color:#fff;opacity:.85;z-index:5}
+.sbar .r{display:flex;gap:5px;align-items:center}
+.sbar .r i{display:block;width:14px;height:7px;border:1px solid #fff;border-radius:2px;opacity:.8}
+.appview{position:absolute;inset:0;opacity:0;transform:scale(1.03);pointer-events:none;
+  transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.appview.on{opacity:1;transform:none}
+.av-head{padding:52px 18px 12px}
+.av-title{font-family:var(--dsp);font-weight:700;font-size:19px;letter-spacing:-.03em}
+.av-sub{font-size:10.5px;color:rgba(255,255,255,.5);margin-top:2px}
+
+.wh{background:#07090D}
+.wh .tabs{display:flex;gap:7px;padding:0 18px 12px}
+.wh .tabs span{font-size:9.5px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.55)}
+.wh .tabs span.act{background:linear-gradient(120deg,var(--a1),var(--a2));color:#0A0C11;font-weight:600}
+.wh .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 18px}
+.wh .grid i{display:block;aspect-ratio:9/17;border-radius:12px;position:relative;overflow:hidden}
+.wh .grid i::after{content:"";position:absolute;inset:auto 0 0;height:34%;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.w1{background:linear-gradient(150deg,#FF7A45,#B0288E 55%,#2B1B6B)}
+.w2{background:linear-gradient(200deg,#12E4C6,#2B6CFF 60%,#101A3C)}
+.w3{background:linear-gradient(140deg,#FFD36E,#FF5F6D 60%,#5A1B4A)}
+.w4{background:linear-gradient(220deg,#8E7BFF,#3D2A8C 55%,#0B0F2B)}
+
+.im{background:#07090D}
+.im .canvas{margin:0 18px;aspect-ratio:1;border-radius:16px;position:relative;overflow:hidden;
+  background:conic-gradient(from 200deg at 40% 35%,#FF6A3D,#B02FA5,#3F6BFF,#12D8C4,#FF6A3D)}
+.im .canvas::after{content:"";position:absolute;inset:0;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  -webkit-mask-image:radial-gradient(circle at 60% 70%,#000 8%,transparent 62%);
+  mask-image:radial-gradient(circle at 60% 70%,#000 8%,transparent 62%)}
+.im .prompt{margin:12px 18px 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);font-size:10px;color:rgba(255,255,255,.66);line-height:1.45}
+.im .chips{display:flex;gap:6px;padding:10px 18px;flex-wrap:wrap}
+.im .chips b{font-weight:500;font-size:9px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.55)}
+.im .gen{margin:6px 18px 0;height:38px;border-radius:12px;background:linear-gradient(120deg,var(--a1),var(--a2));
+  display:grid;place-items:center;font-size:11px;font-weight:600;color:#0A0C11}
+
+.vx{background:radial-gradient(120% 70% at 50% 0%,var(--a-soft),#07090D 62%)}
+.vx .wave{display:flex;align-items:center;justify-content:center;gap:3px;height:120px;margin:6px 16px 0}
+.vx .wave i{width:3px;border-radius:3px;background:linear-gradient(var(--a1),var(--a2));
+  animation:bounce 1.15s var(--ease) infinite alternate}
+@keyframes bounce{from{height:8%}to{height:100%}}
+.vx .fx{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:14px 18px 0}
+.vx .fx b{font-weight:500;font-size:9px;text-align:center;padding:11px 4px;border-radius:11px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
+.vx .fx b.act{background:var(--a-soft);border-color:var(--a1);color:#fff}
+.vx .rec{margin:16px auto 0;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--a1),var(--a2));box-shadow:0 0 0 6px rgba(255,255,255,.05)}
+.vx .rec::after{content:"";width:16px;height:16px;border-radius:4px;background:#0A0C11}
+.swatch{display:flex;gap:8px;justify-content:center;margin-top:26px;position:relative;z-index:3;flex-wrap:wrap}
+.swatch button{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--tx2);transition:.25s}
+.swatch button[aria-pressed="true"]{border-color:var(--a1);color:var(--tx);background:var(--a-soft)}
+
+/* ── ticker ── */
+.ticker{border-block:1px solid var(--line);overflow:hidden;padding:16px 0;background:var(--ink2)}
+.tick{display:flex;gap:44px;width:max-content;animation:slide 34s linear infinite}
+.tick span{display:flex;align-items:center;gap:11px;font-family:var(--dsp);font-size:17px;font-weight:600;
+  letter-spacing:-.02em;color:var(--tx3);white-space:nowrap}
+.tick span em{font-family:var(--mono);font-size:9.5px;font-style:normal;color:var(--a1);letter-spacing:.1em}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── app cards ── */
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.app{position:relative;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--surf);
+  overflow:hidden;transition:transform .45s var(--ease),border-color .35s,background .35s}
+.app::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),var(--a-soft),transparent 68%)}
+.app:hover{transform:translateY(-5px);border-color:var(--line2);background:var(--surf2)}
+.app:hover::before{opacity:1}
+.app>*{position:relative;z-index:2}
+.icon{width:52px;height:52px;border-radius:var(--icon-r);display:grid;place-items:center;margin-bottom:16px;
+  box-shadow:0 8px 22px -8px rgba(0,0,0,.8);transition:border-radius .5s var(--ease)}
+.icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.app h3{font-family:var(--dsp);font-size:17px;font-weight:600;letter-spacing:-.02em;margin:0}
+.app p{margin:5px 0 0;font-size:13px;color:var(--tx2);line-height:1.5}
+.app .meta{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:9.5px;color:var(--tx3)}
+.app .meta .dot{width:3px;height:3px;border-radius:50%;background:var(--tx3)}
+.app .meta .plat{margin-left:auto;color:var(--a1)}
+
+/* ── case study ── */
+.case{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,var(--surf),var(--ink2));overflow:hidden}
+.casetop{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,56px);padding:clamp(28px,4vw,52px)}
+.paw{display:grid;gap:22px;margin-top:26px}
+.paw div{padding-left:18px;border-left:2px solid var(--line2);border-radius:0}
+.paw h4{margin:0 0 5px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--a1)}
+.paw p{margin:0;font-size:14.5px;color:var(--tx2);line-height:1.6}
+.results{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.results div{padding:26px clamp(18px,3vw,32px);border-right:1px solid var(--line)}
+.results div:last-child{border-right:0}
+.results .n{font-family:var(--dsp);font-size:clamp(28px,3.6vw,44px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.results .l{font-size:12.5px;color:var(--tx3);margin-top:8px}
+.shot{border-radius:16px;border:1px solid var(--line);background:#080A0F;padding:16px;position:relative;overflow:hidden}
+.shot .bars{display:flex;align-items:flex-end;gap:5px;height:160px;margin-top:14px}
+.shot .bars i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(var(--a1),var(--a2));opacity:.9}
+.shot .bars i.b{background:rgba(255,255,255,.09)}
+.shot .lbl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--tx3);margin-top:10px}
+
+/* ── capability panes ── */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pane{border:1px solid var(--line);border-radius:18px;padding:clamp(24px,3vw,36px);background:var(--surf)}
+.pane ul{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
+.pane li{display:flex;gap:12px;font-size:14.5px;color:var(--tx2);line-height:1.5}
+.pane li svg{flex:0 0 16px;width:16px;height:16px;margin-top:4px;stroke:var(--a1);fill:none;stroke-width:2}
+
+/* ── process ── */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+.step{padding:26px 22px 0;border-right:1px solid var(--line);position:relative}
+.step:last-child{border-right:0}
+.step::before{content:"";position:absolute;top:-1px;left:0;width:0;height:1px;
+  background:linear-gradient(90deg,var(--a1),var(--a2));transition:width .8s var(--ease)}
+.step.in::before{width:100%}
+.step .num{font-family:var(--mono);font-size:10px;color:var(--a1);letter-spacing:.16em}
+.step h4{font-family:var(--dsp);font-size:17px;font-weight:600;letter-spacing:-.02em;margin:14px 0 8px}
+.step p{margin:0;font-size:13.5px;color:var(--tx2);line-height:1.55}
+
+/* ── stack ── */
+.stackgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sgroup h4{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips b{font-weight:450;font-size:12.5px;padding:6px 11px;border-radius:8px;border:1px solid var(--line);
+  background:var(--surf);color:var(--tx2);transition:.25s}
+.chips b:hover{border-color:var(--a1);color:var(--tx)}
+
+/* ── quotes ── */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.quote{border:1px solid var(--line);border-radius:18px;padding:28px;background:var(--surf)}
+.quote p{margin:0;font-size:15px;line-height:1.6}
+.quote .who{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--tx3)}
+.quote .who b{display:block;color:var(--tx);font-weight:500;font-size:13.5px}
+.stars{display:flex;gap:3px;margin-bottom:14px}
+.stars i{width:12px;height:12px;background:var(--a1);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+
+/* ── contact ── */
+.contact{border:1px solid var(--line);border-radius:24px;padding:clamp(32px,5vw,64px);position:relative;overflow:hidden;
+  background:radial-gradient(120% 100% at 15% 0%,var(--a-soft),transparent 58%),var(--surf)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3)}
+.field input,.field textarea{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:11px;
+  padding:13px 15px;color:var(--tx);font-family:var(--body);font-size:14.5px;transition:border-color .25s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--a1)}
+.field textarea{resize:vertical;min-height:96px}
+.pillrow{display:flex;flex-wrap:wrap;gap:8px}
+.pillrow input{position:absolute;opacity:0;pointer-events:none}
+.pillrow label{padding:9px 14px;border-radius:999px;border:1px solid var(--line);font-size:13px;color:var(--tx2);
+  cursor:pointer;font-family:var(--body);letter-spacing:0;text-transform:none;transition:.25s}
+.pillrow input:checked+label{border-color:var(--a1);background:var(--a-soft);color:var(--tx)}
+.err{color:#FF6B6B;font-size:12.5px;margin-top:10px;display:none}
+.err.on{display:block}
+.note{font-size:12.5px;color:var(--tx3);margin-top:14px}
+
+/* ── footer ── */
+footer{border-top:1px solid var(--line);padding-block:56px 34px;background:var(--ink2)}
+.fgrid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:36px}
+.fgrid h5{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:0 0 15px}
+.fgrid a{display:block;font-size:14px;color:var(--tx2);padding:4px 0;transition:color .2s}
+.fgrid a:hover{color:var(--a1)}
+.fbot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
+  margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--tx3)}
+.social{display:flex;gap:9px}
+.social a{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;transition:.25s}
+.social a:hover{border-color:var(--a1);background:var(--a-soft)}
+.social svg{width:15px;height:15px;fill:var(--tx2)}
+.social a:hover svg{fill:var(--a1)}
+
+/* ── reveal ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+/* ── responsive ── */
+@media(max-width:1080px){
+  .apps,.stackgrid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step{border-bottom:1px solid var(--line)}
+  .quotes{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  .navlinks{display:none}
+  .heroin,.casetop,.duo{grid-template-columns:1fr}
+  .stage{min-height:480px;order:-1}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .form{grid-template-columns:1fr}
+  .results{grid-template-columns:1fr}
+  .results div{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:640px){
+  .navin>.cta{display:none}
+  .navin{justify-content:space-between}
+  .ptog{margin-left:auto}
+}
+@media(max-width:560px){
+  .apps,.stackgrid,.steps,.fgrid{grid-template-columns:1fr}
+  .ptog button{padding:6px 10px;font-size:9px}
+  .navin{gap:12px}
+  .stage{min-height:420px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;animation-iteration-count:1!important}
+  h1.dsp span.line b{transform:none}
+  .rv{opacity:1;transform:none}
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="pre">
+  <div class="mk">BugFix Technologies</div>
+  <div class="bar"><i></i></div>
+  <div class="pct">0%</div>
+</div>
+
+<header class="nav">
+  <div class="navin">
+    <a class="brand" href="#"><span class="glyph"></span>BugFix Technologies</a>
+    <nav class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#case">Case study</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="ptog" role="group" aria-label="Platform">
+      <span class="pill" aria-hidden="true"></span>
+      <button data-plat="ios" aria-pressed="true">iOS</button>
+      <button data-plat="android" aria-pressed="false">Android</button>
+    </div>
+    <a class="cta" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="heroin">
+      <div>
+        <span class="mono eyebrow">Product studio &middot; Lahore, PK</span>
+        <h1 class="dsp" style="margin-top:22px">
+          <span class="line"><b>Apps that</b></span>
+          <span class="line"><b>earn a spot</b></span>
+          <span class="line"><b class="grad">on page one.</b></span>
+        </h1>
+        <p class="lead" style="margin-top:26px">
+          We design, build and ship consumer apps for iOS and Android &mdash; then run the
+          monetization, the store listing and the update cycle that keeps them ranking.
+          Our own portfolio is the proof; we do the same work for clients.
+        </p>
+        <div class="herocta">
+          <a class="cta" href="#contact">Start a project
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="cta ghost" href="#work">See the portfolio</a>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="phone">
+          <div class="screen">
+            <div class="notch" aria-hidden="true"></div>
+            <div class="sbar"><span>9:41</span><span class="r"><span>LTE</span><i></i></span></div>
+
+            <div class="appview on" id="ap-wall">
+              <div class="wh" style="position:absolute;inset:0">
+                <div class="av-head">
+                  <div class="av-title">WallHub</div>
+                  <div class="av-sub">Curated for you &middot; 4K</div>
+                </div>
+                <div class="tabs"><span class="act">For you</span><span>Live</span><span>Depth</span><span>AI</span></div>
+                <div class="grid"><i class="w1"></i><i class="w2"></i><i class="w3"></i><i class="w4"></i></div>
+              </div>
+            </div>
+
+            <div class="appview" id="ap-imora">
+              <div class="im" style="position:absolute;inset:0">
+                <div class="av-head">
+                  <div class="av-title">Imora</div>
+                  <div class="av-sub">12 credits left</div>
+                </div>
+                <div class="canvas"></div>
+                <div class="prompt">Bioluminescent koi drifting through liquid glass, volumetric light, 85mm</div>
+                <div class="chips"><b>Cinematic</b><b>Neon</b><b>Portrait</b><b>4K</b></div>
+                <div class="gen">Generate</div>
+              </div>
+            </div>
+
+            <div class="appview" id="ap-voxa">
+              <div class="vx" style="position:absolute;inset:0">
+                <div class="av-head">
+                  <div class="av-title">Voxa</div>
+                  <div class="av-sub">Live &middot; formant shift &minus;3</div>
+                </div>
+                <div class="wave" id="wave"></div>
+                <div class="fx">
+                  <b>Robot</b><b class="act">Cavern</b><b>Chipmunk</b>
+                  <b>Baritone</b><b>Radio</b><b>Alien</b>
+                </div>
+                <div class="rec"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swatch" role="group" aria-label="Preview app">
+          <button data-app="ap-wall" aria-pressed="true">WallHub</button>
+          <button data-app="ap-imora" aria-pressed="false">Imora</button>
+          <button data-app="ap-voxa" aria-pressed="false">Voxa</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats rv">
+      <div><div class="n" data-edit>24</div><div class="l">Apps shipped</div></div>
+      <div><div class="n" data-edit>18M+</div><div class="l">Lifetime downloads</div></div>
+      <div><div class="n" data-edit>140</div><div class="l">Countries</div></div>
+      <div><div class="n" data-edit>4.6&#9733;</div><div class="l">Average store rating</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="tick">
+    <span>WallHub <em>v3.4.0</em></span><span>Imora <em>v2.1.2</em></span>
+    <span>FontiKey <em>v5.0.1</em></span><span>Voxa <em>v1.8.0</em></span>
+    <span>Vault Remote <em>v4.2.0</em></span><span>Cleanify <em>v2.9.3</em></span>
+    <span>Invoice Maker <em>v1.4.0</em></span><span>Calculator Vault <em>v6.1.0</em></span>
+    <span>WallHub <em>v3.4.0</em></span><span>Imora <em>v2.1.2</em></span>
+    <span>FontiKey <em>v5.0.1</em></span><span>Voxa <em>v1.8.0</em></span>
+    <span>Vault Remote <em>v4.2.0</em></span><span>Cleanify <em>v2.9.3</em></span>
+    <span>Invoice Maker <em>v1.4.0</em></span><span>Calculator Vault <em>v6.1.0</em></span>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">Our portfolio</span>
+        <h2 class="dsp" style="margin-top:18px">Eight apps<br>we own and run.</h2>
+      </div>
+      <p class="lead">Every one designed, built, monetized and maintained in-house. When you hire
+        us, you get the team that already did it &mdash; not a team learning on your budget.</p>
+    </div>
+
+    <div class="apps">
+      <a class="app rv" href="#" style="--d:0s">
+        <span class="icon" style="background:linear-gradient(140deg,#FF6A3D,#B02FA5)">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z"/></svg></span>
+        <h3>Imora</h3>
+        <p>AI art generator with a credit economy and style presets.</p>
+        <div class="meta"><span>AI &amp; Photo</span><span class="dot"></span><span data-edit>4.7&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.05s">
+        <span class="icon" style="background:linear-gradient(140deg,#2B6CFF,#12E4C6)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg></span>
+        <h3>WallHub</h3>
+        <p>4K wallpapers, depth effects and lock-screen widgets.</p>
+        <div class="meta"><span>Personalization</span><span class="dot"></span><span data-edit>4.8&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.1s">
+        <span class="icon" style="background:linear-gradient(140deg,#8E7BFF,#3D2A8C)">
+          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></span>
+        <h3>FontiKey</h3>
+        <p>Custom keyboard themes, Unicode fonts and live translation.</p>
+        <div class="meta"><span>Utilities</span><span class="dot"></span><span data-edit>4.5&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.15s">
+        <span class="icon" style="background:linear-gradient(140deg,#FFD36E,#FF5F6D)">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M8 7v10M16 7v10M4 10v4M20 10v4"/></svg></span>
+        <h3>Voxa</h3>
+        <p>Real-time voice changer with formant-aware DSP.</p>
+        <div class="meta"><span>Entertainment</span><span class="dot"></span><span data-edit>4.6&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:0s">
+        <span class="icon" style="background:linear-gradient(140deg,#12D8C4,#0B7F8F)">
+          <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M12 6v.01M10 11h4M10 15h4"/></svg></span>
+        <h3>Vault Remote</h3>
+        <p>Universal TV remote across every major brand.</p>
+        <div class="meta"><span>Utilities</span><span class="dot"></span><span data-edit>4.4&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.05s">
+        <span class="icon" style="background:linear-gradient(140deg,#6BE07A,#1E7A3C)">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></span>
+        <h3>Cleanify</h3>
+        <p>Storage cleaner for duplicate photos and dead files.</p>
+        <div class="meta"><span>Utilities</span><span class="dot"></span><span data-edit>4.5&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.1s">
+        <span class="icon" style="background:linear-gradient(140deg,#5B8CFF,#2B2FA5)">
+          <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/></svg></span>
+        <h3>Invoice Maker</h3>
+        <p>Sixteen templates, PDF export, four free and twelve Pro.</p>
+        <div class="meta"><span>Business</span><span class="dot"></span><span data-edit>4.7&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+
+      <a class="app rv" href="#" style="--d:.15s">
+        <span class="icon" style="background:linear-gradient(140deg,#B0288E,#3B1060)">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 018 0v3M12 15v2"/></svg></span>
+        <h3>Calculator Vault</h3>
+        <p>Private media vault disguised as a working calculator.</p>
+        <div class="meta"><span>Privacy</span><span class="dot"></span><span data-edit>4.6&#9733;</span><span class="plat" data-ios="App Store" data-android="Google Play">App Store</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="case">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">Case study &middot; Voxa</span>
+        <h2 class="dsp" style="margin-top:18px">Rebuilding the<br>audio engine.</h2>
+      </div>
+      <p class="lead">The version that shipped first worked. It just didn't sound good enough,
+        and the reviews said so. Here's what we changed.</p>
+    </div>
+
+    <div class="case rv">
+      <div class="casetop">
+        <div>
+          <h3 class="dsp">A voice changer that survives being listened to twice.</h3>
+          <div class="paw">
+            <div>
+              <h4>Problem</h4>
+              <p>Naive pitch shifting moved the formants along with the pitch, so every effect
+                landed in chipmunk territory. Exports also clipped the reverb tail, cutting the
+                last half-second off every recording.</p>
+            </div>
+            <div>
+              <h4>Approach</h4>
+              <p>Split pitch, formant and tempo into three independent controls. Built a per-effect
+                DSP recipe with explicit formant targets instead of one shared shifter, and moved
+                everything into a custom in-process AUv3 audio unit.</p>
+            </div>
+            <div>
+              <h4>Outcome</h4>
+              <p>Sample-accurate LFO modulation, correct export tails, and effects that hold up
+                on a second listen. Rating recovered inside two release cycles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="shot">
+          <div class="mono" style="color:var(--tx3)">Store rating &middot; by release</div>
+          <div class="bars" aria-hidden="true">
+            <i class="b" style="height:42%"></i><i class="b" style="height:38%"></i>
+            <i class="b" style="height:46%"></i><i style="height:62%"></i>
+            <i style="height:74%"></i><i style="height:88%"></i><i style="height:96%"></i>
+          </div>
+          <div class="lbl"><span>v1.2</span><span>v1.8</span></div>
+        </div>
+      </div>
+      <div class="results">
+        <div><div class="n" data-edit>3.6 &rarr; 4.6</div><div class="l">Average store rating</div></div>
+        <div><div class="n" data-edit>&lt;12ms</div><div class="l">Round-trip audio latency</div></div>
+        <div><div class="n" data-edit>0</div><div class="l">Truncated exports since v1.6</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">What we do</span>
+        <h2 class="dsp" style="margin-top:18px">Build it. Then<br>actually ship it.</h2>
+      </div>
+      <p class="lead">Most studios hand you a binary and leave. Shipping is the part that decides
+        whether the app makes money, so we stay for it.</p>
+    </div>
+
+    <div class="duo">
+      <div class="pane rv">
+        <span class="mono" style="color:var(--a1)">01 &mdash; Build</span>
+        <h3 class="dsp" style="margin-top:14px">Native, not a wrapper.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>SwiftUI and UIKit on iOS, Kotlin and Jetpack Compose on Android</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>MVVM + Coordinators, so screens stay testable as the app grows</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>On-device AI and audio work: Core ML, AVAudioEngine, custom AUv3</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Interactive HTML prototypes before a line of app code gets written</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Widgets, extensions, keyboards, share sheets &mdash; the platform surface area</li>
+        </ul>
+      </div>
+      <div class="pane rv" style="--d:.08s">
+        <span class="mono" style="color:var(--a1)">02 &mdash; Ship</span>
+        <h3 class="dsp" style="margin-top:14px">Revenue is a feature.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>StoreKit 2 and Play Billing, with paywalls we A/B test properly</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Credit economies and subscription tiers that fit the product, not a template</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Ad mediation across AdMob, AppLovin MAX, Meta Audience Network, ironSource</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>ATT, Data safety, Play policy declarations and rejection handling</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Store listing, screenshots, ASO and the post-launch update cadence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">How a build runs</span>
+        <h2 class="dsp" style="margin-top:18px">Five stages.<br>No surprises.</h2>
+      </div>
+      <p class="lead">Order matters here &mdash; each stage produces something you can look at before
+        we spend money on the next one.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h4>Scope</h4>
+        <p>Competitor teardown, monetization model, and a feature list with a line drawn through what ships in v1.</p></div>
+      <div class="step"><span class="num">02</span><h4>Prototype</h4>
+        <p>A clickable HTML build of the real screens. You approve the product before it costs anything to change.</p></div>
+      <div class="step"><span class="num">03</span><h4>Build</h4>
+        <p>Native implementation on a two-week cycle, with a TestFlight or internal-test build at the end of each one.</p></div>
+      <div class="step"><span class="num">04</span><h4>Monetize</h4>
+        <p>Paywall, billing, ads and analytics wired in and tested against real sandbox purchases, not mocks.</p></div>
+      <div class="step"><span class="num">05</span><h4>Ship</h4>
+        <p>Store submission, review responses, ASO, and the first three updates &mdash; because launch day is not the finish.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">Stack</span>
+        <h2 class="dsp" style="margin-top:18px">What we run<br>in production.</h2>
+      </div>
+      <p class="lead">Not a list of things we've read about. These are shipping in apps on the
+        store right now.</p>
+    </div>
+    <div class="stackgrid">
+      <div class="sgroup rv"><h4>iOS</h4><div class="chips">
+        <b>Swift</b><b>SwiftUI</b><b>UIKit</b><b>StoreKit 2</b><b>AVAudioEngine</b><b>AUv3</b><b>Core ML</b><b>WidgetKit</b></div></div>
+      <div class="sgroup rv" style="--d:.05s"><h4>Android</h4><div class="chips">
+        <b>Kotlin</b><b>Jetpack Compose</b><b>Play Billing</b><b>Room</b><b>WorkManager</b><b>ExoPlayer</b><b>Coroutines</b></div></div>
+      <div class="sgroup rv" style="--d:.1s"><h4>Growth</h4><div class="chips">
+        <b>AdMob</b><b>AppLovin MAX</b><b>Meta Audience</b><b>ironSource</b><b>RevenueCat</b><b>Adjust</b><b>AppsFlyer</b><b>Firebase</b></div></div>
+      <div class="sgroup rv" style="--d:.15s"><h4>Design &amp; ops</h4><div class="chips">
+        <b>Figma</b><b>Cursor</b><b>Claude Code</b><b>Fastlane</b><b>GitHub Actions</b><b>Supabase</b><b>Sentry</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead rv">
+      <div>
+        <span class="mono eyebrow">Reviews</span>
+        <h2 class="dsp" style="margin-top:18px">From the store,<br>not a testimonial page.</h2>
+      </div>
+    </div>
+    <div class="quotes">
+      <div class="quote rv">
+        <div class="stars" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+        <p>Finally a wallpaper app that doesn't paywall the good ones on the first tap. Depth
+          effect actually works with my clock.</p>
+        <div class="who" data-edit><b>WallHub</b>App Store &middot; United States</div>
+      </div>
+      <div class="quote rv" style="--d:.05s">
+        <div class="stars" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+        <p>I've tried six of these. This is the only one where the deep voice sounds like a
+          person and not a broken speaker.</p>
+        <div class="who" data-edit><b>Voxa</b>App Store &middot; United Kingdom</div>
+      </div>
+      <div class="quote rv" style="--d:.1s">
+        <div class="stars" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+        <p>Made an invoice on my phone in the car park and got paid the same day. That's the
+          whole review.</p>
+        <div class="who" data-edit><b>Invoice Maker</b>Google Play &middot; Australia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact rv">
+      <span class="mono eyebrow">Start a project</span>
+      <h2 class="dsp" style="margin-top:18px;max-width:16ch">Tell us what you want to ship.</h2>
+      <p class="lead" style="margin-top:18px">We reply within one working day with a scope, a
+        rough timeline and a number. If it isn't a fit we'll say so instead of billing you to find out.</p>
+
+      <form class="form" id="cform" novalidate>
+        <div class="field"><label for="f-name">Your name</label>
+          <input id="f-name" name="name" placeholder="Ayesha Khan" autocomplete="name"></div>
+        <div class="field"><label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" placeholder="you@company.com" autocomplete="email"></div>
+        <div class="field full"><label>Platform</label>
+          <div class="pillrow">
+            <input type="checkbox" id="p-ios" checked><label for="p-ios">iOS</label>
+            <input type="checkbox" id="p-and"><label for="p-and">Android</label>
+            <input type="checkbox" id="p-both"><label for="p-both">Both</label>
+            <input type="checkbox" id="p-adv"><label for="p-adv">Not sure yet</label>
+          </div>
+        </div>
+        <div class="field full"><label for="f-msg">What are you building</label>
+          <textarea id="f-msg" name="message" placeholder="An AI photo app with a credit system. We have Figma files and an Android version already."></textarea></div>
+        <div class="field full">
+          <button class="cta" type="submit" style="justify-self:start">Send it over
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="err" id="ferr">Add your email and a line about the project first.</p>
+          <p class="note">Or email <a href="mailto:hello@bugfixtechnologies.com" style="color:var(--a1)">hello@bugfixtechnologies.com</a> directly.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="#" style="margin-bottom:16px"><span class="glyph"></span>BugFix Technologies</a>
+        <p style="color:var(--tx2);font-size:14px;max-width:34ch;margin:0">
+          A product studio in Lahore building consumer apps for iOS and Android.</p>
+        <div class="social" style="margin-top:22px">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zm0 6.16a3.68 3.68 0 100 7.36 3.68 3.68 0 000-7.36zm0 6.07a2.39 2.39 0 110-4.78 2.39 2.39 0 010 4.78zm4.69-6.22a.86.86 0 11-1.72 0 .86.86 0 011.72 0z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 002.48 2.5A2.5 2.5 0 007.5 6a2.5 2.5 0 00-2.52-2.5zM3 21h4V9H3v12zm7 0h4v-6.3c0-1.66.9-2.4 2-2.4 1.05 0 1.9.75 1.9 2.4V21h4v-6.9c0-3.5-1.85-5.1-4.3-5.1-1.98 0-2.9 1.1-3.4 1.9V9h-4v12z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 015 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></a>
+        </div>
+      </div>
+      <div><h5>Work</h5>
+        <a href="#work">Portfolio</a><a href="#case">Case study</a><a href="#process">Process</a></div>
+      <div><h5>Company</h5>
+        <a href="#services">Services</a><a href="#contact">Contact</a><a href="#">Careers</a></div>
+      <div><h5>Legal</h5>
+        <a href="https://www.bugfixtechnologies.com/T&amp;C.html">Terms</a>
+        <a href="https://www.bugfixtechnologies.com/privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot">
+      <span>&copy; <span id="yr">2026</span> BugFix Technologies. All rights reserved.</span>
+      <span class="mono">Lahore, PK</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* BugFix Technologies — site behaviour */
+(function () {
+  'use strict';
+
+  var R = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var yr = document.getElementById('yr');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ── preloader ── */
+  var pre = document.getElementById('pre');
+  if (pre) {
+    var fill = pre.querySelector('.bar i');
+    var pct = pre.querySelector('.pct');
+    var n = 0;
+    var t = setInterval(function () {
+      n += R ? 40 : Math.random() * 16 + 6;
+      if (n >= 100) {
+        n = 100;
+        clearInterval(t);
+        setTimeout(function () { pre.classList.add('done'); }, 260);
+      }
+      fill.style.width = n + '%';
+      pct.textContent = Math.round(n) + '%';
+    }, R ? 20 : 90);
+  }
+
+  /* ── sticky nav ── */
+  var nav = document.querySelector('.nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('stuck', window.scrollY > 12);
+  }, { passive: true });
+
+  /* ── platform toggle (signature control) ── */
+  var tog = document.querySelector('.ptog');
+  var pill = tog.querySelector('.pill');
+  var pbtns = tog.querySelectorAll('button');
+
+  function movePill(btn) {
+    if (!btn) return;
+    pill.style.width = btn.offsetWidth + 'px';
+    pill.style.transform = 'translateX(' + (btn.offsetLeft - 3) + 'px)';
+  }
+
+  function setPlatform(p) {
+    document.documentElement.classList.toggle('plat-android', p === 'android');
+    Array.prototype.forEach.call(pbtns, function (b) {
+      var on = b.dataset.plat === p;
+      b.setAttribute('aria-pressed', String(on));
+      if (on) movePill(b);
+    });
+    var labels = document.querySelectorAll('[data-ios][data-android]');
+    Array.prototype.forEach.call(labels, function (el) {
+      el.textContent = p === 'android' ? el.dataset.android : el.dataset.ios;
+    });
+  }
+
+  Array.prototype.forEach.call(pbtns, function (b) {
+    b.addEventListener('click', function () { setPlatform(b.dataset.plat); });
+  });
+  movePill(pbtns[0]);
+  window.addEventListener('load', function () { movePill(pbtns[0]); });
+  window.addEventListener('resize', function () {
+    movePill(tog.querySelector('[aria-pressed="true"]'));
+  });
+
+  /* ── phone screen switcher ── */
+  var swatches = document.querySelectorAll('.swatch button');
+  Array.prototype.forEach.call(swatches, function (b) {
+    b.addEventListener('click', function () {
+      Array.prototype.forEach.call(swatches, function (x) {
+        x.setAttribute('aria-pressed', 'false');
+      });
+      var views = document.querySelectorAll('.appview');
+      Array.prototype.forEach.call(views, function (v) { v.classList.remove('on'); });
+      b.setAttribute('aria-pressed', 'true');
+      document.getElementById(b.dataset.app).classList.add('on');
+    });
+  });
+
+  /* ── waveform bars ── */
+  var wave = document.getElementById('wave');
+  if (wave) {
+    for (var i = 0; i < 30; i++) {
+      var bar = document.createElement('i');
+      bar.style.animationDelay = (i * 0.045).toFixed(2) + 's';
+      bar.style.animationDuration = (0.85 + (i % 5) * 0.12).toFixed(2) + 's';
+      wave.appendChild(bar);
+    }
+  }
+
+  /* ── card cursor glow ── */
+  var cards = document.querySelectorAll('.app');
+  Array.prototype.forEach.call(cards, function (c) {
+    c.addEventListener('pointermove', function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ── scroll reveal ── */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+  var reveal = document.querySelectorAll('.rv, .step');
+  Array.prototype.forEach.call(reveal, function (el) { io.observe(el); });
+
+  /* ── contact form ── */
+  var form = document.getElementById('cform');
+  var err = document.getElementById('ferr');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('f-email').value.trim();
+    var msg = document.getElementById('f-msg').value.trim();
+    var valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && msg.length > 3;
+    err.classList.toggle('on', !valid);
+    if (valid) {
+      window.location.href = 'mailto:hello@bugfixtechnologies.com'
+        + '?subject=' + encodeURIComponent('New project enquiry')
+        + '&body=' + encodeURIComponent(msg + '\n\n— ' + email);
+    }
+  });
+
+  ['f-email', 'f-msg'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      err.classList.remove('on');
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
