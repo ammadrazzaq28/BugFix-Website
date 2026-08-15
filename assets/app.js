@@ -45,13 +45,67 @@
     setInterval(tickClock, 1000);
   } catch (err) {}
 
+  /* ── theme ── */
+  var THEME_KEY = 'bf-theme';
+  var themeBtn = document.getElementById('theme');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function currentTheme() {
+    return document.documentElement.classList.contains('theme-dark') ? 'dark' : 'light';
+  }
+
+  function setTheme(t, persist) {
+    var h = document.documentElement;
+    h.classList.remove('theme-light', 'theme-dark');
+    h.classList.add('theme-' + t);
+    h.style.colorScheme = t;
+    if (themeMeta) themeMeta.setAttribute('content', t === 'dark' ? '#0B0C0E' : '#FAF7F2');
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      themeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+    }
+    if (persist) {
+      try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+    }
+  }
+
+  if (!document.documentElement.classList.contains('theme-dark') &&
+      !document.documentElement.classList.contains('theme-light')) {
+    var stored = null;
+    try { stored = localStorage.getItem(THEME_KEY); } catch (e) {}
+    if (stored !== 'light' && stored !== 'dark') {
+      stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    setTheme(stored, false);
+  } else {
+    setTheme(currentTheme(), false);
+  }
+
+  requestAnimationFrame(function () {
+    document.documentElement.classList.add('theme-ready');
+  });
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      setTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+    });
+  }
+
+  try {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem(THEME_KEY); } catch (err) {}
+      if (saved !== 'light' && saved !== 'dark') setTheme(e.matches ? 'dark' : 'light', false);
+    });
+  } catch (e) {}
+
   /* ── sticky nav + scroll progress ── */
   var nav = document.querySelector('.nav');
   var bar = document.querySelector('.progress i');
   var prog = document.querySelector('.progress');
   function onScroll() {
     var y = window.scrollY;
-    nav.classList.toggle('stuck', y > 8);
+    if (nav) nav.classList.toggle('stuck', y > 8);
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(100, (y / max) * 100) : 0;
     if (bar) bar.style.width = p + '%';
@@ -62,11 +116,11 @@
 
   /* ── platform toggle ── */
   var tog = document.querySelector('.ptog');
-  var pill = tog.querySelector('.pill');
-  var pbtns = tog.querySelectorAll('button');
+  var pill = tog && tog.querySelector('.pill');
+  var pbtns = tog ? tog.querySelectorAll('button') : [];
 
   function movePill(btn) {
-    if (!btn) return;
+    if (!btn || !pill) return;
     pill.style.width = btn.offsetWidth + 'px';
     pill.style.transform = 'translateX(' + (btn.offsetLeft - 3) + 'px)';
   }
@@ -89,10 +143,10 @@
   });
   setPlatform('android');
   window.addEventListener('load', function () {
-    movePill(tog.querySelector('[aria-pressed="true"]'));
+    if (tog) movePill(tog.querySelector('[aria-pressed="true"]'));
   });
   window.addEventListener('resize', function () {
-    movePill(tog.querySelector('[aria-pressed="true"]'));
+    if (tog) movePill(tog.querySelector('[aria-pressed="true"]'));
     if (window.innerWidth > 900) setMenu(false);
   });
 
