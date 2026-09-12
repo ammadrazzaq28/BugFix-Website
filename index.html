@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" class="t-teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BugFix Technologies — consumer apps for iOS and Android, and the websites that sell them. Native builds, monetization, store listing and the update cycle.">
+<meta name="theme-color" content="#F2EFE8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BugFix Technologies">
+<meta property="og:description" content="Consumer apps for iOS and Android, and the websites that sell them.">
+<meta property="og:url" content="https://www.bugfixtechnologies.com/">
+<meta property="og:image" content="https://www.bugfixtechnologies.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.bugfixtechnologies.com/">
+<title>BugFix Technologies</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1.2c9.6 0 14.8 5.2 14.8 14.8S25.6 30.8 16 30.8 1.2 25.6 1.2 16 6.4 1.2 16 1.2z' fill='%232F6F6B'/%3E%3Cg fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.4 9.6V22.4M8.4 9.6h4.6a3.2 3.2 0 0 1 0 6.4H8.4m0 0h5a3.2 3.2 0 0 1 0 6.4H8.4'/%3E%3Cpath d='M19.4 22.4V9.6h4.5M19.4 16h3.6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="topline"><i id="topfill"></i></div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="bfg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="var(--a2)"/><stop offset="1" stop-color="var(--a1)"/>
+        </linearGradient>
+      </defs>
+      <path class="mtile" d="M16 1.2c9.6 0 14.8 5.2 14.8 14.8S25.6 30.8 16 30.8 1.2 25.6 1.2 16 6.4 1.2 16 1.2z" fill="url(#bfg)"/>
+      <path class="mB" d="M8.4 9.6V22.4M8.4 9.6h4.6a3.2 3.2 0 0 1 0 6.4H8.4m0 0h5a3.2 3.2 0 0 1 0 6.4H8.4"/>
+      <path class="mF" d="M19.4 22.4V9.6h4.5M19.4 16h3.6"/>
+    </svg>BugFix<em>Technologies</em></a>
+
+  <nav class="nlinks" id="nlinks" aria-label="Sections">
+    <span class="npill" id="npill"></span>
+    <a href="#about" data-s="about">About</a>
+    <a href="#proc"  data-s="proc">Process</a>
+    <a href="#stk"   data-s="stk">Stack</a>
+    <a href="#rev"   data-s="rev">Reviews</a>
+    <a href="#qa"    data-s="qa">Questions</a>
+    <a href="#start" data-s="start">Contact</a>
+  </nav>
+
+  <div class="nright">
+    <div class="themer" role="group" aria-label="Theme">
+  <div class="sw">
+    <button data-t="teal"   aria-pressed="true"  aria-label="Teal accent"   style="background:#2F6F6B"></button>
+    <button data-t="indigo" aria-pressed="false" aria-label="Indigo accent" style="background:#3B4CCA"></button>
+    <button data-t="ember"  aria-pressed="false" aria-label="Ember accent"  style="background:#C2410C"></button>
+    <button data-t="violet" aria-pressed="false" aria-label="Violet accent" style="background:#6D28D9"></button>
+    <button data-t="forest" aria-pressed="false" aria-label="Forest accent" style="background:#3F6212"></button>
+  </div>
+  <span class="divider"></span>
+  <button class="mode" id="mode" aria-label="Switch to dark theme" aria-pressed="false">
+    <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/></svg>
+    <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.2 8.2 0 019.5 4 8.3 8.3 0 1020 14.5z"/></svg>
+  </button>
+</div>
+    <a class="ncta" href="#start">Start a project</a>
+  </div>
+
+  <button class="burger" id="burger" aria-expanded="false" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="sheet" id="sheet" hidden>
+  <a href="#about">About</a><a href="#proc">Process</a><a href="#stk">Stack</a>
+  <a href="#rev">Reviews</a><a href="#qa">Questions</a><a href="#start">Contact</a>
+</div>
+
+
+
+<section class="hero" id="top">
+  <div>
+    <h1>Apps that earn a spot <em>on page one.</em></h1>
+    <p class="lead">We design, build and ship consumer apps for iOS and Android — and the
+      websites that sell them. Monetization, store listing and the update cycle included.
+      Our own portfolio is the proof; we do the same work for clients.</p>
+    <div class="row">
+      <a class="cta" href="#start"><span class="dot"></span> Start a project</a>
+    </div>
+    <div class="chips">
+      <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">Kotlin</span>
+      <span class="chip">Compose</span><span class="chip">Next.js</span><span class="chip">React</span>
+      <span class="chip">TypeScript</span><span class="chip">Firebase</span>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="scene" id="scene">
+      <div class="floatwrap">
+
+        <!-- laptop: the website -->
+        <div class="laptop">
+          <div class="lid">
+            <div class="lscreen">
+              <div class="lbar">
+                <i></i><i></i><i></i>
+                <span class="url" id="url">bugfixtechnologies.com</span>
+              </div>
+              <div class="lbody">
+                <div class="editor">
+                  <div class="ln"><s>export default function</s> <b>Hero</b>() {</div>
+                  <div class="ln">&nbsp;&nbsp;<s>return</s> (</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&lt;<u>section</u> <k>className</k>=<q>"hero"</q>&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>Nav</b> <k>items</k>={links} /&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<u>h1</u>&gt;Apps that earn</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a spot <q>on page one.</q>&lt;/<u>h1</u>&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>CTA</b>&gt;Start a project&lt;/<b>CTA</b>&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<b>AppGrid</b> <k>apps</k>={apps} /&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<u>section</u>&gt;</div>
+                  <div class="ln">&nbsp;&nbsp;)</div>
+                  <div class="ln">}</div>
+                  <span class="caret" id="caret"></span>
+                </div>
+
+                <div class="preview">
+                  <span class="pvtag">preview</span>
+                  <div class="site" id="site">
+                    <div class="snav">
+                      <b>BugFix</b>
+                      <span class="nl"></span><span class="nl"></span>
+                      <u class="nb"></u>
+                    </div>
+                    <div class="shero">
+                      <div class="sh sh1"></div>
+                      <div class="sh sh2"></div>
+                      <div class="sh sh3"></div>
+                      <div class="sbtns"><em></em><em class="o"></em></div>
+                    </div>
+                    <div class="scards"><i></i><i></i><i></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="deck"></div>
+          <div class="base"></div>
+        </div>
+
+        <!-- phone: the app -->
+        <div class="phone">
+          <div class="frame">
+            <div class="screen" id="screen">
+              <div class="notch"></div>
+              <div class="glare"></div>
+              <div class="sbar">
+                <span id="clock">9:41</span>
+                <span class="sig"><i></i><i></i><i></i><i></i></span>
+              </div>
+              <div class="app">
+                <div class="apptitle">BugFix</div>
+                <div class="appsub">8 live · 150+ shipped</div>
+                <div class="grid">
+
+                  <div class="tile t1">
+                    <span class="ico">
+                      <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                    </span>
+                    <b>Voxa</b>
+                    <em>Voice &amp; audio</em>
+                    <span class="rate">4.9 ★</span>
+                  </div>
+
+                  <div class="tile t2">
+                    <span class="ico">
+                      <svg viewBox="0 0 40 40" aria-hidden="true">
+                        <circle cx="29" cy="11" r="4" class="sun"/>
+                        <path d="M0 30 L11 18 L20 27 L28 20 L40 31 V40 H0 Z" class="m1"/>
+                        <path d="M0 36 L9 27 L18 34 L27 26 L40 37 V40 H0 Z" class="m2"/>
+                      </svg>
+                    </span>
+                    <b>WallHub</b>
+                    <em>Wallpapers</em>
+                    <span class="rate">4.9 ★</span>
+                  </div>
+
+                  <div class="tile t3">
+                    <span class="ico">
+                      <span class="keys"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="sp"></i></span>
+                    </span>
+                    <b>FontiKey</b>
+                    <em>Keyboard</em>
+                    <span class="rate">4.9 ★</span>
+                  </div>
+
+                  <div class="tile t4">
+                    <span class="ico">
+                      <svg viewBox="0 0 40 40" aria-hidden="true">
+                        <circle cx="20" cy="20" r="12" class="o1"/>
+                        <circle cx="20" cy="20" r="7"  class="o2"/>
+                        <path d="M20 4 l1.8 4.6 4.6 1.8 -4.6 1.8 -1.8 4.6 -1.8 -4.6 -4.6 -1.8 4.6 -1.8z" class="sp2"/>
+                      </svg>
+                    </span>
+                    <b>Imora</b>
+                    <em>AI art</em>
+                    <span class="rate">4.9 ★</span>
+                  </div>
+
+                </div>
+              </div>
+              <div class="tabs" id="tabs">
+                <span class="sel"></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <div class="badge" id="badge">
+            <span class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            <span>Shipped together<small id="btime">web · iOS · Android</small></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <span class="caption">One team, both surfaces — the site and the app, built side by side.</span>
+  </div>
+</section>
+
+<section class="abt" id="about">
+  <div class="swrap">
+    <div class="phead">
+      <span class="peyebrow on">001 — About us</span>
+      <h2 class="ptitle">Two surfaces,<br><em>one team.</em></h2>
+      <p class="psub">Most studios do the app and hand you a template for the site.
+        We build both, so the store listing, the landing page and the product
+        say the same thing.</p>
+    </div>
+
+    <div class="split" id="split">
+      <article class="half h-app">
+        <span class="hicon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><line x1="11" y1="18.6" x2="13" y2="18.6"/></svg>
+        </span>
+        <h3>Mobile apps</h3>
+        <p>Native on both stores — Swift and SwiftUI on iOS, Kotlin and Compose on
+          Android. Paywalls, ads, widgets, on-device audio and the review process that
+          comes with them.</p>
+        <ul class="hlist">
+          <li>iOS &amp; Android, native</li>
+          <li>Monetization wired and tested</li>
+          <li>Store listing, ASO, review replies</li>
+        </ul>
+      </article>
+
+      <span class="splitline" aria-hidden="true"></span>
+
+      <article class="half h-web">
+        <span class="hicon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><line x1="8" y1="20.5" x2="16" y2="20.5"/><line x1="2.5" y1="8" x2="21.5" y2="8"/></svg>
+        </span>
+        <h3>Websites</h3>
+        <p>Marketing sites, product pages and web apps — React and Next.js, typed,
+          fast, and measured. The same design system as the app, so nothing looks
+          borrowed.</p>
+        <ul class="hlist">
+          <li>Next.js, React, TypeScript</li>
+          <li>CMS, forms and analytics wired in</li>
+          <li>Core Web Vitals, not just a pretty build</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="pin">
+    <p class="peyebrow">Across every app on the store</p>
+    <div class="stars" id="stars" aria-hidden="true">
+      <span class="star"><i></i></span><span class="star"><i></i></span><span class="star"><i></i></span>
+      <span class="star"><i></i></span><span class="star"><i></i></span>
+    </div>
+    <div class="score"><span id="score">0.0</span></div>
+    <p class="rcount"><span id="rcount">0</span> ratings counted</p>
+    <p class="pline" id="pline">Average rating, weighted across every release.
+      Not the best one — the average.</p>
+    <div class="pbar" id="pbar"><i></i></div>
+  </div>
+</section>
+
+<section class="proc" id="proc">
+  <div class="ppin">
+    <div class="phead">
+      <span class="peyebrow on">005 — How a build runs</span>
+      <h2 class="ptitle">Five stages.<br><em>No surprises.</em></h2>
+      <p class="psub">Order matters here — each stage produces something you can
+        look at before we spend money on the next one.</p>
+    </div>
+
+    <div class="pcols">
+      <ol class="stages" id="stages">
+        <li class="sg"><span class="sn">01</span><span class="sl">Scope</span></li>
+        <li class="sg"><span class="sn">02</span><span class="sl">Prototype</span></li>
+        <li class="sg"><span class="sn">03</span><span class="sl">Build</span></li>
+        <li class="sg"><span class="sn">04</span><span class="sl">Monetize</span></li>
+        <li class="sg"><span class="sn">05</span><span class="sl">Ship</span></li>
+        <span class="spine"><i id="spinefill"></i></span>
+      </ol>
+
+      <div class="artifact" id="artifact">
+        <div class="acard" data-i="0">
+          <span class="atag">Deliverable — feature list</span>
+          <ul class="flist">
+            <li>Voice presets, real-time</li>
+            <li>Cloud sync</li>
+            <li class="cut">Social feed</li>
+            <li class="cut">In-app messaging</li>
+            <li>Paywall, 3 tiers</li>
+          </ul>
+          <p class="anote">Everything struck through is what we argued out of v1.</p>
+        </div>
+
+        <div class="acard" data-i="1">
+          <span class="atag">Deliverable — clickable prototype</span>
+          <div class="wire">
+            <span class="wscreen s1"><i></i><i></i><i></i></span>
+            <span class="warrow"></span>
+            <span class="wscreen s2"><i></i><i></i><i></i></span>
+            <span class="warrow"></span>
+            <span class="wscreen s3"><i></i><i></i><i></i></span>
+            <span class="wcursor"></span>
+          </div>
+          <p class="anote">Real screens in the browser. You approve the product before
+            it costs anything to change.</p>
+        </div>
+
+        <div class="acard" data-i="2">
+          <span class="atag">Deliverable — a build you can install</span>
+          <div class="brow"><span class="bk">Version</span><span class="bv" id="bver">1.0.0</span></div>
+          <div class="brow"><span class="bk">Channel</span><span class="bv">TestFlight · internal</span></div>
+          <div class="brow"><span class="bk">Cycle</span><span class="bv">every two weeks</span></div>
+          <div class="bbar"><i></i></div>
+          <p class="anote">A real device build at the end of every cycle, not a demo video.</p>
+        </div>
+
+        <div class="acard" data-i="3">
+          <span class="atag">Deliverable — a paywall that charges</span>
+          <div class="pay">
+            <span class="ptier"><b>Monthly</b><em>$4.99</em></span>
+            <span class="ptier sel"><b>Yearly</b><em>$29.99</em><span class="pbadge">Best value</span></span>
+          </div>
+          <div class="ptick"><span class="tickdot"></span>Sandbox purchase verified</div>
+          <p class="anote">Billing, ads and analytics tested against real sandbox
+            purchases, not mocks.</p>
+        </div>
+
+        <div class="acard" data-i="4">
+          <span class="atag">Deliverable — live on the store</span>
+          <div class="ship">
+            <span class="sstatus"><span class="tickdot"></span>Ready for Sale</span>
+            <div class="srow"><span class="bk">Review</span><span class="bv">passed, first pass</span></div>
+            <div class="srow"><span class="bk">Listing</span><span class="bv">ASO + screenshots shipped</span></div>
+            <div class="srow"><span class="bk">After</span><span class="bv">first three updates included</span></div>
+          </div>
+          <p class="anote">Launch day is not the finish.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stk" id="stk">
+  <div class="swrap">
+    <div class="phead">
+      <span class="peyebrow on">006 — Stack</span>
+      <h2 class="ptitle">What we run<br><em>in production.</em></h2>
+      <p class="psub">Not a list of things we've read about. Pick anything below and it
+        will show you the apps on the store running it today.</p>
+    </div>
+
+    <div class="apps" id="apps">
+      <button class="ap" data-app="voxa">Voxa</button>
+      <button class="ap" data-app="wallhub">WallHub</button>
+      <button class="ap" data-app="fontikey">FontiKey</button>
+      <button class="ap" data-app="imora">Imora</button>
+      <button class="ap" data-app="cleanify">Cleanify</button>
+      <button class="ap" data-app="invoice">Invoice Maker</button>
+      <button class="ap" data-app="wellsum">WellSum</button>
+      <button class="ap" data-app="printer">Printer Pro</button>
+    </div>
+
+    <p class="readout" id="readout">Hover a technology to see where it ships.</p>
+
+    <div class="sgrid" id="sgrid">
+      <div class="sgroup"><h4>iOS</h4><div class="tchips">
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,wellsum,printer">Swift</button>
+        <button data-apps="wallhub,imora,cleanify,wellsum,printer">SwiftUI</button>
+        <button data-apps="voxa,fontikey,printer">UIKit</button>
+        <button data-apps="voxa,wallhub,imora,cleanify,wellsum">StoreKit 2</button>
+        <button data-apps="voxa">AVAudioEngine</button>
+        <button data-apps="voxa">AUv3</button>
+        <button data-apps="imora,cleanify">Core ML</button>
+        <button data-apps="wallhub,wellsum">WidgetKit</button>
+      </div></div>
+
+      <div class="sgroup"><h4>Android</h4><div class="tchips">
+        <button data-apps="wallhub,invoice,wellsum,printer">Kotlin</button>
+        <button data-apps="wallhub,invoice,wellsum">Jetpack Compose</button>
+        <button data-apps="wallhub,invoice,wellsum">Play Billing</button>
+        <button data-apps="invoice,wellsum">Room</button>
+        <button data-apps="cleanify,wellsum">WorkManager</button>
+        <button data-apps="voxa">ExoPlayer</button>
+        <button data-apps="wallhub,invoice,wellsum">Coroutines</button>
+      </div></div>
+
+      <div class="sgroup"><h4>Web</h4><div class="tchips">
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">Next.js</button>
+        <button data-apps="voxa,wallhub,imora,invoice,wellsum">React</button>
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">TypeScript</button>
+        <button data-apps="wallhub,imora,invoice,printer">Tailwind</button>
+        <button data-apps="voxa,imora,invoice">Node</button>
+        <button data-apps="voxa,wallhub,imora,cleanify">Vercel</button>
+      </div></div>
+
+      <div class="sgroup"><h4>Growth</h4><div class="tchips">
+        <button data-apps="wallhub,fontikey,cleanify,printer">AdMob</button>
+        <button data-apps="wallhub,imora,cleanify">AppLovin MAX</button>
+        <button data-apps="fontikey,cleanify">Meta Audience</button>
+        <button data-apps="wallhub,printer">ironSource</button>
+        <button data-apps="voxa,imora,wellsum">RevenueCat</button>
+        <button data-apps="voxa,wallhub">Adjust</button>
+        <button data-apps="imora,invoice">AppsFlyer</button>
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">Firebase</button>
+      </div></div>
+
+      <div class="sgroup"><h4>Design &amp; ops</h4><div class="tchips">
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">Figma</button>
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">Cursor</button>
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">Claude Code</button>
+        <button data-apps="voxa,wallhub,fontikey,imora">Fastlane</button>
+        <button data-apps="voxa,wallhub,fontikey,imora,cleanify,invoice,wellsum,printer">GitHub Actions</button>
+        <button data-apps="imora,invoice">Supabase</button>
+        <button data-apps="voxa,wallhub,imora">Sentry</button>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="rev" id="rev">
+  <div class="swrap">
+    <div class="phead">
+      <span class="peyebrow on">007 — Reviews</span>
+      <h2 class="ptitle">From the store,<br><em>not a testimonial page.</em></h2>
+      <p class="psub">Pulled from the listings, with the version and the reply attached.
+        Switch the store and the numbers change with it.</p>
+    </div>
+
+    <div class="panel">
+      <div class="ptabs" role="tablist" aria-label="Store">
+        <button class="ptab" id="tab-ios" role="tab" aria-selected="true"  data-p="ios">App Store</button>
+        <button class="ptab" id="tab-and" role="tab" aria-selected="false" data-p="and">Google Play</button>
+        <span class="ppill" id="ppill"></span>
+      </div>
+
+      <div class="summary">
+        <div class="sbig">
+          <span class="snum" id="snum">4.9</span>
+          <span class="sstars" id="sstars"><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="scount" id="scount">12,480 ratings</span>
+        </div>
+        <div class="hist" id="hist">
+          <span class="hrow"><b>5</b><span class="hbar"><i data-w="92"></i></span></span>
+          <span class="hrow"><b>4</b><span class="hbar"><i data-w="6"></i></span></span>
+          <span class="hrow"><b>3</b><span class="hbar"><i data-w="1"></i></span></span>
+          <span class="hrow"><b>2</b><span class="hbar"><i data-w="0.5"></i></span></span>
+          <span class="hrow"><b>1</b><span class="hbar"><i data-w="0.5"></i></span></span>
+        </div>
+      </div>
+
+      <div class="rlist" id="rlist"></div>
+    </div>
+  </div>
+</section>
+
+<section class="qa" id="qa">
+  <div class="swrap">
+    <div class="phead">
+      <span class="peyebrow on">008 — Questions</span>
+      <h2 class="ptitle">You asked,<br><em>we answered.</em></h2>
+      <p class="psub">Every answer has a number in it. Pick a question and you get
+        the number first, not four paragraphs of hedging.</p>
+    </div>
+
+    <div class="qcols">
+      <div class="qlist" id="qlist" role="tablist" aria-label="Questions">
+        <button class="q" role="tab" aria-selected="true"  data-i="0">How long does a build take?</button>
+        <button class="q" role="tab" aria-selected="false" data-i="1">Do you only work on your own apps?</button>
+        <button class="q" role="tab" aria-selected="false" data-i="2">Do you stay after launch?</button>
+        <button class="q" role="tab" aria-selected="false" data-i="3">Where are you based?</button>
+      </div>
+
+      <div class="apanel" id="apanel" role="tabpanel" aria-live="polite">
+        <span class="afig" id="afig">4–15</span>
+        <span class="aunit" id="aunit">weeks, depending on what the app needs</span>
+        <p class="atext" id="atext"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec" id="start">
+  <div class="swrap">
+    <div class="phead">
+      <span class="peyebrow on">009 — Start a project</span>
+      <h2 class="ptitle">Tell us what<br><em>you want to ship.</em></h2>
+      <p class="psub">Answer three things and the scope builds itself on the right —
+        the same estimate we'd give you on a call, before you send anything.</p>
+    </div>
+
+    <div class="ccols">
+      <div class="cform">
+        <fieldset class="fset">
+          <legend>Platform</legend>
+          <div class="opts" data-group="plat" data-multi="false">
+            <button class="opt sel" data-v="ios"  data-w="0">iOS</button>
+            <button class="opt"     data-v="and"  data-w="0">Android</button>
+            <button class="opt"     data-v="both" data-w="3">Both stores</button>
+            <button class="opt"     data-v="web"  data-w="0">Website only</button>
+            <button class="opt"     data-v="all"  data-w="4">Apps + website</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>What kind of build</legend>
+          <div class="opts" data-group="type" data-multi="false">
+            <button class="opt sel" data-v="utility" data-w="4">Utility</button>
+            <button class="opt"     data-v="content" data-w="6">Content &amp; media</button>
+            <button class="opt"     data-v="audio"   data-w="8">Audio or camera</button>
+            <button class="opt"     data-v="ai"      data-w="7">AI-powered</button>
+            <button class="opt"     data-v="site"    data-w="4">Marketing site</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>What it needs <span class="hint">pick any</span></legend>
+          <div class="opts" data-group="needs" data-multi="true">
+            <button class="opt" data-v="money"  data-w="1">Paywall or ads</button>
+            <button class="opt" data-v="back"   data-w="2">Accounts &amp; backend</button>
+            <button class="opt" data-v="rt"     data-w="2">Real-time processing</button>
+            <button class="opt" data-v="ai"     data-w="2">On-device AI</button>
+            <button class="opt" data-v="widget" data-w="1">Widgets &amp; extensions</button>
+          </div>
+        </fieldset>
+
+        <div class="frow">
+          <label class="fld"><span>Your name</span>
+            <input id="c-name" type="text" placeholder="Ayesha Khan" autocomplete="name"></label>
+          <label class="fld"><span>Email</span>
+            <input id="c-mail" type="email" placeholder="you@company.com" autocomplete="email"></label>
+        </div>
+        <label class="fld"><span>Anything else we should know</span>
+          <textarea id="c-msg" rows="3" placeholder="We have Figma files and an Android version already."></textarea></label>
+
+        <button class="cta send" id="c-send">Send this scope</button>
+        <p class="cerr" id="c-err" role="alert">Add your email and a line about the project first.</p>
+      </div>
+
+      <aside class="scope" id="scope" aria-live="polite">
+        <span class="atag">Your scope, so far</span>
+        <div class="sline">
+          <span class="sfig"><span id="wmin">4</span>–<span id="wmax">6</span></span>
+          <span class="sunit">weeks to a shipped v1</span>
+        </div>
+        <div class="srows">
+          <div class="srow2"><span class="bk">Platform</span><span class="bv" id="s-plat">iOS</span></div>
+          <div class="srow2"><span class="bk">Builds you'll see</span><span class="bv" id="s-builds">3</span></div>
+          <div class="srow2"><span class="bk">Stages</span><span class="bv">all five, in order</span></div>
+          <div class="srow2"><span class="bk">After launch</span><span class="bv">first 3 updates included</span></div>
+        </div>
+        <div class="stagerow" id="s-stages">
+          <span>Scope</span><span>Prototype</span><span>Build</span><span>Monetize</span><span>Ship</span>
+        </div>
+        <p class="anote">An estimate, not a quote. We confirm it after the teardown —
+          and we say no if it isn't a fit.</p>
+
+        <div class="reach">
+          <span class="atag">Or reach us directly</span>
+          <a class="rl" href="mailto:support@bugfixtechnologies.com">support@bugfixtechnologies.com</a>
+          <a class="rl" href="tel:+923216468664">0321-6468664</a>
+          <a class="rl" href="tel:+923244434862">0324-4434862</a>
+          <span class="rmetaline">California, USA · replies within one working day</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+<footer class="foot">
+  <div class="swrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="logo" href="#top"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="bfg2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="var(--a2)"/><stop offset="1" stop-color="var(--a1)"/>
+        </linearGradient>
+      </defs>
+      <path class="mtile" d="M16 1.2c9.6 0 14.8 5.2 14.8 14.8S25.6 30.8 16 30.8 1.2 25.6 1.2 16 6.4 1.2 16 1.2z" fill="url(#bfg2)"/>
+      <path class="mB" d="M8.4 9.6V22.4M8.4 9.6h4.6a3.2 3.2 0 0 1 0 6.4H8.4m0 0h5a3.2 3.2 0 0 1 0 6.4H8.4"/>
+      <path class="mF" d="M19.4 22.4V9.6h4.5M19.4 16h3.6"/>
+    </svg>BugFix<em>Technologies</em></a>
+        <p>Consumer apps for iOS and Android, and the websites that sell them.</p>
+      </div>
+      <div class="fcol"><h5>Company</h5>
+        <a href="#about">About</a><a href="#proc">Process</a><a href="#stk">Stack</a></div>
+      <div class="fcol"><h5>Proof</h5>
+        <a href="#rev">Reviews</a><a href="#qa">Questions</a></div>
+      <div class="fcol"><h5>Contact</h5>
+        <a href="mailto:support@bugfixtechnologies.com">support@bugfixtechnologies.com</a>
+        <a href="tel:+923216468664">0321-6468664</a>
+        <a href="tel:+923244434862">0324-4434862</a></div>
+    </div>
+    <div class="fbase">
+      <span>© <span id="yr">2026</span> BugFix Technologies · California, USA</span>
+      <span class="fsm"><a href="#top">Back to top</a></span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/app.js"></script>
+</body>
+</html>
